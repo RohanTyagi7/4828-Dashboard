@@ -6,7 +6,7 @@ import xbox from './images/xbox.png';
 import cone from './images/cone.png';
 import cube from './images/cube.png';
 import none from './images/none.png';
-import Data from './data';
+//import Data from './data';
 const Home = () => {
   const [fieldOriented, setFieldOriented] = useState(false);
   const [navx, setNavx] = useState(0);
@@ -18,7 +18,7 @@ const Home = () => {
   const [controlsConnected, setontrolsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
-  const data = Data();
+  //const data = Data();
   return (
     <div className="cardHolder">
       <div className="bigCard card">
@@ -27,7 +27,7 @@ const Home = () => {
           <h2 style={{ marginLeft: "4vw", width: "3pc", textAlign: "center" }}>{navx}</h2>
         </div>
         <div className="genCard">
-          <h2 className="center verticalCenter" style={{ color: (autoTurn.toLowerCase() == "off") ? ("#dddddd") : ("#1c87c9") }}>AutoTurn: {autoTurn.substring(0, 1).toUpperCase() + autoTurn.substring(1)}</h2>
+          <h2 className="center" style={{ color: (autoTurn.toLowerCase() == "off") ? ("#dddddd") : ("#1c87c9") }}>AutoTurn: {autoTurn.substring(0, 1).toUpperCase() + autoTurn.substring(1)}</h2>
         </div>
         {/*<button onClick={(e)=>{setNavx(navx+5);}}>add</button>
         <button onClick={(e)=>{setAutoTurn("load");}}>load</button>
@@ -82,6 +82,7 @@ const Home = () => {
         <img src={none} style={{ height: "100px", marginLeft: "22%" }} onClick={(e) => { setLed("off") }} />
         <img src={cube} style={{ height: "100px", marginLeft: "18%" }} onClick={(e) => { setLed("purple") }} />
       </div>
+        <div className="blink" style={{marginTop: "-10px", height: "20px", width: "100vw", backgroundColor: (led.toLowerCase() != "off")?(led):(""), marginLeft: "-7px"}}></div>
     </div>
   );
 };

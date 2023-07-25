@@ -22,7 +22,7 @@ body, select{
   margin-top: 20px;
   float: left;
   height: 85%;
-  width: 70%;
+  width: 50%;
   display: flex;
   margin: auto;
   align-items:center;
@@ -127,9 +127,9 @@ opt:focus, input:focus{
   border-radius: 10px;
 }
 .lastUpdate{
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
+  position: fixed;
+  bottom: 6px;
+  right: 6px;
 }
 .powerBar{
   width: 10px;
@@ -141,7 +141,7 @@ opt:focus, input:focus{
   margin: 10px;
 }
 .fillPowerBar{
-  background-color: black;
+  background-color: #111111;
   height: 26px;
   border-radius: 10px;
 }
@@ -161,4 +161,31 @@ opt:focus, input:focus{
   rotate: 90deg;
   border-image: linear-gradient(to right, #bbbbbb 50%, transparent 50%) 100% 1;
   transition: all 0.3s ease-in-out;
+}
+.airBar{
+  width: 80%;
+  height: 20px;
+  border: 2px solid #dddddd;
+  border-radius: 10px;
+  background-color: #111111;
+  margin: 10px;
+}
+.fillAirBar{
+  background-color: lightgreen;
+  width: 67%;
+  height: 100%;
+  border-radius: 5px;
+}
+.buttonMap{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.blink{
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
