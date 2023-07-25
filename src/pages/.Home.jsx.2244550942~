@@ -1,0 +1,86 @@
+import './App.css';
+import React, { useState, useEffect, useRef } from "react";
+import { Outlet, Link } from "react-router-dom";
+import ps4 from './images/ps4.png';
+import xbox from './images/xbox.png';
+import cone from './images/cone.png';
+import cube from './images/cube.png';
+const Home = () => {
+  const [fieldOriented, setFieldOriented] = useState(false); //done
+  const [navx, setNavx] = useState(0); //done
+  const [joystick, setJoystick] = useState("xbox"); //done
+  const [autoTurn, setAutoTurn] = useState("off"); //done
+  const [slowMode, setSlowMode] = useState(false); //done
+  const [profile, setProfile] = useState("workshop"); //done
+  const [auton, setAuton] = useState("None"); //done
+  const [controlsConnected, setontrolsConnected] = useState(false); //done
+  const [led, setLed] = useState("off");
+  const [timeLeft, setTimeLeft] = useState(0);
+  return (
+    <div className="cardHolder">
+      <div className="bigCard card">
+        <div style={{float: "left"}}>
+        <div className="navxChart"><div className="navxBar" style={{rotate: (navx+90 + "deg")}}></div><div className="navxPredictionBar" style={{display: (autoTurn.toLowerCase() == "off")?("none"):("block"), rotate: (autoTurn.toLowerCase() == "load")?("90deg"):("-90deg")}}></div></div>
+        <h2 style={{marginLeft: "4vw", width: "3pc", textAlign: "center"}}>{navx}</h2>
+          </div>
+        <div className="genCard">
+          <h2 className="center verticalCenter" style={{color: (autoTurn.toLowerCase() == "off")?("white"):("#1c87c9")}}>AutoTurn: {autoTurn.substring(0,1).toUpperCase() + autoTurn.substring(1)}</h2>
+        </div>
+        {/*<button onClick={(e)=>{setNavx(navx+5);}}>add</button>
+        <button onClick={(e)=>{setAutoTurn("load");}}>load</button>
+        <button onClick={(e)=>{setAutoTurn("score");}}>score</button>
+        <button onClick={(e)=>{setAutoTurn("off");}}>off</button>*/}
+      </div>
+      <div className="card tallCard" style={{borderColor: (slowMode)?("#1c87c9"):("lightgreen")}}>
+        <h2 className="center">Slow Mode</h2>
+        {(slowMode)?(<h3 className="center">Active</h3>):(<h3 className="center">X</h3>)}
+      </div>
+      <div className="card tallCard" style={{borderColor: (fieldOriented)?("lightgreen"):("red")}}>
+        {(!fieldOriented)?(<div className="error"></div>):(<div></div>)}
+        <h2 className="center">Field Oriented</h2>
+        {(fieldOriented)?(<h3 className="center">Active</h3>):(<h3 className="center">X</h3>)}
+      </div>
+      <div className="card">
+        <h2 className="center">{profile.substring(0,1).toUpperCase() + profile.substring(1)} Profile</h2>
+        <div className="center">
+          <select className="opt" id="profileOpt" style={{borderBottomColor: (profile == "workshop")?("#1c87c9"):("lightgreen")}} onChange={(e)=>{setProfile(document.getElementById('profileOpt').value)}}>
+            <option value="workshop">Workshop</option>
+            <option value="competition">Competition</option>
+          </select>
+        </div>
+      </div>
+      <div className="card" style={{borderColor: (auton.toLowerCase() != "none")?("lightgreen"):("red")}}>
+        {(auton.toLowerCase() == "none")?(<div className="error"></div>):(<div></div>)}
+        <h2 className="center">Autonomous</h2>
+        <div className="center">
+          <select className="opt" id="autonOpt" onChange={(e)=>{setAuton(document.getElementById('autonOpt').value); console.log(auton)}} style={{borderColor: (auton.toLowerCase() != "none")?("lightgreen"):("red")}}>
+            <option value="None">None</option>
+            <option value="Cube High + Taxi">Cube High + Taxi</option>
+            <option value="Cone High + Taxi">Cone High + Taxi</option>
+            <option value="Cone High">Cone High</option>
+            <option value="Mid + Taxi">Mid + Taxi</option>
+            <option value="Mid Place">Mid Place</option>
+            <option value="Taxi">Taxi</option>
+          </select>
+        </div>
+      </div>
+      <div className="card wideCard" style={{borderColor: (controlsConnected)?("lightgreen"):("red")}}>
+        {(!controlsConnected)?(<div className="error"></div>):(<div></div>)}
+        <img src={(joystick == "xbox")?(xbox):(ps4)} style={{cursor: "pointer", height: "100px", width: "100px", objectFit: "contain", float: "left"}} onClick={(e)=>{if(joystick=="xbox"){setJoystick("ps4")}else{setJoystick("xbox")}}}/>
+        <h2 className="center verticalCenter" style={{color: (controlsConnected)?("#dddddd"):("red"), marginTop: "30px"}}>{(controlsConnected)?("Connected"):("NOT CONNECTED")}</h2>
+      </div>
+      <div className="card wideCard">
+        <h2 className="center">Time Left:</h2>
+        <h1 className="center" style={{fontSize: "40px"}}>130</h1>
+      </div>
+      <div className="card wideCard">
+        <h2 className="center">LED</h2>
+        <img src={cone} s/>
+        <img src={cube} />
+      </div>
+      <div className="lastUpdate">Last Updated 07.24.2023</div>
+    </div>
+    );
+  };
+
+export default Home;
