@@ -18,8 +18,15 @@ const Home = () => {
   const [controlsConnected, setontrolsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
-  // const data = Data();
-  // data.update()
+  useEffect(() => {
+    fetch('http://localhost:4000/')
+    .then((response) => response.json())
+    .then((data) => {
+      fetch('http://localhost:4000/data')
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    })
+  }, []);
   return (
     <div className="cardHolder">
       <div className="bigCard card">
@@ -70,7 +77,7 @@ const Home = () => {
       </div>
       <div className="card wideCard" style={{ borderColor: (controlsConnected) ? ("lightgreen") : ("red") }}>
         {(!controlsConnected) ? (<div className="error"></div>) : (<div></div>)}
-        <img src={(joystick == "xbox") ? (xbox) : (ps4)} style={{ cursor: "pointer", height: "100px", width: "100px", objectFit: "contain", float: "left" }} onClick={(e) => { if (joystick == "xbox") { setJoystick("ps4") } else { setJoystick("xbox") } }} />
+        <img alt="" src={(joystick == "xbox") ? (xbox) : (ps4)} style={{ cursor: "pointer", height: "100px", width: "100px", objectFit: "contain", float: "left" }} onClick={(e) => { if (joystick == "xbox") { setJoystick("ps4") } else { setJoystick("xbox") } }} />
         <h2 className="center verticalCenter" style={{ color: (controlsConnected) ? ("#dddddd") : ("red"), marginTop: "30px" }}>{(controlsConnected) ? ("Connected") : ("NOT CONNECTED")}</h2>
       </div>
       <div className="card wideCard">
@@ -79,9 +86,9 @@ const Home = () => {
       </div>
       <div className="card wideCard" style={{ borderColor: (led.toLowerCase() != "off") ? (led) : ("lightgreen") }}>
         <h2 className="center">LED</h2>
-        <img src={cone} style={{ height: "100px", marginLeft: "5%" }} onClick={(e) => { setLed("yellow") }} />
-        <img src={none} style={{ height: "100px", marginLeft: "22%" }} onClick={(e) => { setLed("off") }} />
-        <img src={cube} style={{ height: "100px", marginLeft: "18%" }} onClick={(e) => { setLed("purple") }} />
+        <img alt="" src={cone} style={{ height: "100px", marginLeft: "5%" }} onClick={(e) => { setLed("yellow") }} />
+        <img alt="" src={none} style={{ height: "100px", marginLeft: "22%" }} onClick={(e) => { setLed("off") }} />
+        <img alt="" src={cube} style={{ height: "100px", marginLeft: "18%" }} onClick={(e) => { setLed("purple") }} />
       </div>
         <div className="blink" style={{marginTop: "-10px", height: "20px", width: "100vw", backgroundColor: (led.toLowerCase() != "off")?(led):(""), marginLeft: "-7px"}}></div>
     </div>

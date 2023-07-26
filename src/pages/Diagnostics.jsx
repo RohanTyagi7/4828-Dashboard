@@ -40,7 +40,15 @@ const Diagnostics = () => {
   const [a3, setA3] = useState(0);
   const [a4, setA4] = useState(0);
   const [a5, setA5] = useState(0);
-
+  useEffect(() => {
+    fetch('http://localhost:4000/')
+    .then((response) => response.json())
+    .then((data) => {
+      fetch('http://localhost:4000/data')
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    })
+  }, []);
   return (
     <div className="cardHolder">
       <div className="card">
