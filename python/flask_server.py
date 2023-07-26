@@ -1,7 +1,7 @@
 import flask
 from flask import jsonify, request, make_response
 from flask_cors import CORS, cross_origin
-#import ros2_node
+import ros2_node
 
 app = flask.Flask(__name__)
 cors = CORS(app)
@@ -13,14 +13,13 @@ run_already = False
 def start():
     global run_already
     if not run_already:
-        #ros2_node.main()
+        ros2_node.main()
         run_already = True
     return jsonify('Server is running')
 
 @app.route('/data')
 def getRos2Data():
-    #result = ros2_node.data
-    result = "hello"
+    result = ros2_node.data
     return (jsonify(result))
     
     

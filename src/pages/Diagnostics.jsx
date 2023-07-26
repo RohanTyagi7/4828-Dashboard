@@ -41,13 +41,19 @@ const Diagnostics = () => {
   const [a4, setA4] = useState(0);
   const [a5, setA5] = useState(0);
   useEffect(() => {
-    fetch('http://localhost:4000/')
-    .then((response) => response.json())
-    .then((data) => {
-      fetch('http://localhost:4000/data')
+    const updateData = () => {
+      fetch('http://localhost:4000/')
         .then((response) => response.json())
-        .then((data) => console.log(data))
-    })
+        .then((data) => {
+          fetch('http://localhost:4000/data')
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+        })
+    };
+    const intervalId = setInterval(updateData, 20);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
   return (
     <div className="cardHolder">
