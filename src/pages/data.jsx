@@ -1,6 +1,6 @@
 const rti = require('rticonnextdds-connector')
 const path = require('path')
-const configFile = path.join(__dirname, './xml/rticonf.xml')
+// const configFile = path.resolve(__dirname, './xml/rticonf.xml')
 
 class Data {
   constructor() {
