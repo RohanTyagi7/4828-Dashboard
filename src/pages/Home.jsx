@@ -6,7 +6,7 @@ import xbox from './images/xbox.png';
 import cone from './images/cone.png';
 import cube from './images/cube.png';
 import none from './images/none.png';
-//import Data from './data';
+import Data from './data.jsx';
 const Home = () => {
   const [fieldOriented, setFieldOriented] = useState(false);
   const [navx, setNavx] = useState(0);
@@ -18,7 +18,8 @@ const Home = () => {
   const [controlsConnected, setontrolsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
-  //const data = Data();
+  const data = Data();
+  // data.update()
   return (
     <div className="cardHolder">
       <div className="bigCard card">
