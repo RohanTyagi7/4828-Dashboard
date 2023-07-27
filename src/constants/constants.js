@@ -1,0 +1,1 @@
+const updateRate = 1000; // ms
