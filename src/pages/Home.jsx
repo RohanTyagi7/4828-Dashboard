@@ -6,6 +6,7 @@ import xbox from './images/xbox.png';
 import cone from './images/cone.png';
 import cube from './images/cube.png';
 import none from './images/none.png';
+import { updateRate } from '../constants/constants';
 // import Data from './data.jsx';
 const Home = () => {
   const [fieldOriented, setFieldOriented] = useState(false);
@@ -28,7 +29,7 @@ const Home = () => {
             .then((data) => console.log(data))
         })
     };
-    const intervalId = setInterval(updateData, 20);
+    const intervalId = setInterval(updateData, updateRate);
     return () => {
       clearInterval(intervalId);
     };

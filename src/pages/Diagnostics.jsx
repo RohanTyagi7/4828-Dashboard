@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useState, useEffect, useRef } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { updateRate } from "../constants/constants";
+
 const Diagnostics = () => {
   const [swerveFrontLeftSpeed, setSwerveFrontLeftSpeed] = useState(0);
   const [swerveFrontRightSpeed, setSwerveFrontRightSpeed] = useState(0);
@@ -40,6 +42,7 @@ const Diagnostics = () => {
   const [a3, setA3] = useState(0);
   const [a4, setA4] = useState(0);
   const [a5, setA5] = useState(0);
+
   useEffect(() => {
     const updateData = () => {
       fetch('http://localhost:4000/')
@@ -50,7 +53,7 @@ const Diagnostics = () => {
             .then((data) => console.log(data))
         })
     };
-    const intervalId = setInterval(updateData, 20);
+    const intervalId = setInterval(updateData, updateRate);
     return () => {
       clearInterval(intervalId);
     };
