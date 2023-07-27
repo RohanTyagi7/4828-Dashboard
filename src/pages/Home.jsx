@@ -19,15 +19,20 @@ const Home = () => {
   const [controlsConnected, setontrolsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
+
+  useEffect(() => {
+    fetch('http://localhost:4000/')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("INIT")
+      })
+  }, []);
+
   useEffect(() => {
     const updateData = () => {
-      fetch('http://localhost:4000/')
+      fetch('http://localhost:4000/data')
         .then((response) => response.json())
-        .then((data) => {
-          fetch('http://localhost:4000/data')
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-        })
+        .then((data) => console.log(data))
     };
     const intervalId = setInterval(updateData, updateRate);
     return () => {

@@ -1,1 +1,1 @@
-const updateRate = 1000; // ms
+const updateRate = 20; // ms
