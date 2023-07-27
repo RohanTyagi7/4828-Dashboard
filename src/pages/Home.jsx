@@ -14,9 +14,9 @@ const Home = () => {
   const [joystick, setJoystick] = useState("xbox");
   const [autoTurn, setAutoTurn] = useState("off");
   const [slowMode, setSlowMode] = useState(false);
-  const [profile, setProfile] = useState("workshop");
-  const [auton, setAuton] = useState("None");
-  const [controlsConnected, setontrolsConnected] = useState(false);
+  const [profile, setProfile] = useState("workshop"); //add push
+  const [auton, setAuton] = useState("None"); //add push
+  const [controlsConnected, setControlsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
 
@@ -32,7 +32,17 @@ const Home = () => {
     const updateData = () => {
       fetch('http://localhost:4000/data')
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+          setFieldOriented(data['fieldOriented']);
+          setNavx(data['navx']);
+          setAutoTurn(data['autoTurn']);
+          setSlowMode(data['slowMode']);
+          setProfile(data['profile']);
+          setAuton(data['auton']);
+          setControlsConnected(data['controlsConnected']);
+          setLed(data['led']);
+          setTimeLeft(data['timeLeft']);
+        })
     };
     const intervalId = setInterval(updateData, updateRate);
     return () => {

@@ -55,7 +55,46 @@ const Diagnostics = () => {
     const updateData = () => {
       fetch('http://localhost:4000/data')
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+          setSwerveFrontLeftSpeed(data['swerve']['frontLeft']['speed']);
+          setSwerveFrontRightSpeed(data['swerve']['frontRight']['speed']);
+          setSwerveBackLeftSpeed(data['swerve']['backLeft']['speed']);
+          setSwerveBackRightSpeed(data['swerve']['backRight']['speed']);
+          setSwerveFrontLeftDirection(data['swerve']['frontLeft']['direction']);
+          setSwerveFrontRightDirection(data['swerve']['frontRight']['direction']);
+          setSwerveBackLeftDirection(data['swerve']['backLeft']['direction']);
+          setSwerveBackRightDirection(data['swerve']['backRight']['direction']);
+          setSwerveFrontLeftTemperature(data['swerve']['frontLeft']['temperature']);
+          setSwerveFrontRightTemperature(data['swerve']['frontRight']['temperature']);
+          setSwerveBackLeftTemperature(data['swerve']['backLeft']['temperature']);
+          setSwerveBackRightTemperature(data['swerve']['backRight']['temperature']);
+          setAirTank(data['airTank']);
+          setIntakePiston(data['intakePiston']['state']);
+          setElevatorSliderPiston(data['elevatorSliderPiston']['state']);
+          setElevatorPivotPiston(data['elevatorPivotPiston']['state']);
+          setElevatorPosition(data['elevatorPosition']['state']);
+          setBattery(data['battery']);
+          setB0(data['controller']['button']['b0']);
+          setB1(data['controller']['button']['b1']);
+          setB2(data['controller']['button']['b2']);
+          setB3(data['controller']['button']['b3']);
+          setB4(data['controller']['button']['b4']);
+          setB5(data['controller']['button']['b5']);
+          setB6(data['controller']['button']['b6']);
+          setB7(data['controller']['button']['b7']);
+          setB8(data['controller']['button']['b8']);
+          setB9(data['controller']['button']['b9']);
+          setB10(data['controller']['button']['b10']);
+          setB11(data['controller']['button']['b11']);
+          setB12(data['controller']['button']['b12']);
+          setB13(data['controller']['button']['b13']);
+          setA0(data['controller']['axis']['a0']);
+          setA1(data['controller']['axis']['a1']);
+          setA2(data['controller']['axis']['a2']);
+          setA3(data['controller']['axis']['a3']);
+          setA4(data['controller']['axis']['a4']);
+          setA5(data['controller']['axis']['a5']);
+        })
     };
     const intervalId = setInterval(updateData, updateRate);
     return () => {
