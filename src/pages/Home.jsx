@@ -7,6 +7,7 @@ import cone from './images/cone.png';
 import cube from './images/cube.png';
 import none from './images/none.png';
 import { updateRate } from '../constants/constants';
+import JSON from 'json5';
 // import Data from './data.jsx';
 const Home = () => {
   const [fieldOriented, setFieldOriented] = useState(false);
@@ -29,26 +30,46 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const updateData = () => {
-      fetch('http://localhost:4000/data')
-        .then((response) => response.json())
-        .then((data) => {
-          setFieldOriented(data['fieldOriented']);
-          setNavx(data['navx']);
-          setAutoTurn(data['autoTurn']);
-          setSlowMode(data['slowMode']);
-          setProfile(data['profile']);
-          setAuton(data['auton']);
-          setControlsConnected(data['controlsConnected']);
-          setLed(data['led']);
-          setTimeLeft(data['timeLeft']);
-        })
-    };
-    const intervalId = setInterval(updateData, updateRate);
-    return () => {
-      clearInterval(intervalId);
-    };
+    const intervalId = setInterval(() => {
+          fetch('http://localhost:4000/data')
+            .then((response) => response.json())
+            .then((data) => {
+              var newData = data[0];
+              setFieldOriented(newData['fieldOriented']);
+              setNavx(newData['navx']);
+              setAutoTurn(newData['autoTurn']);
+              setSlowMode(newData['slowMode']);
+              setProfile(newData['profile']);
+              setAuton(newData['auton']);
+              setControlsConnected(newData['controlsConnected']);
+              setLed(newData['led']);
+              setTimeLeft(newData['timeLeft']);
+            })
+    }, 100);
+    return () => clearInterval(intervalId);
   }, []);
+
+  // useEffect(() => {
+  //   const updateData = () => {
+  //     fetch('http://localhost:4000/data')
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setFieldOriented(data['fieldOriented']);
+  //         setNavx(data['navx']);
+  //         setAutoTurn(data['autoTurn']);
+  //         setSlowMode(data['slowMode']);
+  //         setProfile(data['profile']);
+  //         setAuton(data['auton']);
+  //         setControlsConnected(data['controlsConnected']);
+  //         setLed(data['led']);
+  //         setTimeLeft(data['timeLeft']);
+  //       })
+  //   };
+  //   const intervalId = setInterval(updateData, updateRate);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
   return (
     <div className="cardHolder">
       <div className="bigCard card">

@@ -32,75 +32,70 @@ const Diagnostics = () => {
   const [b7, setB7] = useState(false);
   const [b8, setB8] = useState(false);
   const [b9, setB9] = useState(false);
-  const [b10, setB10] = useState(false);
-  const [b11, setB11] = useState(false);
-  const [b12, setB12] = useState(false);
-  const [b13, setB13] = useState(false);
   const [a0, setA0] = useState(0);
   const [a1, setA1] = useState(0);
   const [a2, setA2] = useState(0);
   const [a3, setA3] = useState(0);
   const [a4, setA4] = useState(0);
   const [a5, setA5] = useState(0);
+  const [a6, setA6] = useState(0);
+  const [a7, setA7] = useState(0);
+
+  // useEffect(() => {
+  //   fetch('http://localhost:4000/')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("INIT")
+  //     })
+  // }, []);
 
   useEffect(() => {
-    fetch('http://localhost:4000/')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("INIT")
-      })
+    const intervalId = setInterval(() => {
+          fetch('http://localhost:4000/data')
+            .then((response) => response.json())
+            .then((data) => {
+              var newData = data[0];
+              setSwerveFrontLeftSpeed(newData['swerve']['frontLeft']['speed']);
+              setSwerveFrontRightSpeed(newData['swerve']['frontRight']['speed']);
+              setSwerveBackLeftSpeed(newData['swerve']['backLeft']['speed']);
+              setSwerveBackRightSpeed(newData['swerve']['backRight']['speed']);
+              setSwerveFrontLeftDirection(newData['swerve']['frontLeft']['direction']);
+              setSwerveFrontRightDirection(newData['swerve']['frontRight']['direction']);
+              setSwerveBackLeftDirection(newData['swerve']['backLeft']['direction']);
+              setSwerveBackRightDirection(newData['swerve']['backRight']['direction']);
+              setSwerveFrontLeftTemperature(newData['swerve']['frontLeft']['temperature']);
+              setSwerveFrontRightTemperature(newData['swerve']['frontRight']['temperature']);
+              setSwerveBackLeftTemperature(newData['swerve']['backLeft']['temperature']);
+              setSwerveBackRightTemperature(newData['swerve']['backRight']['temperature']);
+              setAirTank(newData['airTank']);
+              setIntakePiston(newData['intakePiston']['state']);
+              setElevatorSliderPiston(newData['elevatorSliderPiston']['state']);
+              setElevatorPivotPiston(newData['elevatorPivotPiston']['state']);
+              setElevatorPosition(newData['elevatorPosition']);
+              setBattery(newData['battery']);
+              setB0(newData['controller']['button']['b0']);
+              setB1(newData['controller']['button']['b1']);
+              setB2(newData['controller']['button']['b2']);
+              setB3(newData['controller']['button']['b3']);
+              setB4(newData['controller']['button']['b4']);
+              setB5(newData['controller']['button']['b5']);
+              setB6(newData['controller']['button']['b6']);
+              setB7(newData['controller']['button']['b7']);
+              setB8(newData['controller']['button']['b8']);
+              setB9(newData['controller']['button']['b9']);
+              setA0(newData['controller']['axis']['a0']);
+              setA1(newData['controller']['axis']['a1']);
+              setA2(newData['controller']['axis']['a2']);
+              setA3(newData['controller']['axis']['a3']);
+              setA4(newData['controller']['axis']['a4']);
+              setA5(newData['controller']['axis']['a5']);
+              setA6(newData['controller']['axis']['a5']);
+              setA7(newData['controller']['axis']['a5']);
+            })
+    }, 100);
+    return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    const updateData = () => {
-      fetch('http://localhost:4000/data')
-        .then((response) => response.json())
-        .then((data) => {
-          setSwerveFrontLeftSpeed(data['swerve']['frontLeft']['speed']);
-          setSwerveFrontRightSpeed(data['swerve']['frontRight']['speed']);
-          setSwerveBackLeftSpeed(data['swerve']['backLeft']['speed']);
-          setSwerveBackRightSpeed(data['swerve']['backRight']['speed']);
-          setSwerveFrontLeftDirection(data['swerve']['frontLeft']['direction']);
-          setSwerveFrontRightDirection(data['swerve']['frontRight']['direction']);
-          setSwerveBackLeftDirection(data['swerve']['backLeft']['direction']);
-          setSwerveBackRightDirection(data['swerve']['backRight']['direction']);
-          setSwerveFrontLeftTemperature(data['swerve']['frontLeft']['temperature']);
-          setSwerveFrontRightTemperature(data['swerve']['frontRight']['temperature']);
-          setSwerveBackLeftTemperature(data['swerve']['backLeft']['temperature']);
-          setSwerveBackRightTemperature(data['swerve']['backRight']['temperature']);
-          setAirTank(data['airTank']);
-          setIntakePiston(data['intakePiston']['state']);
-          setElevatorSliderPiston(data['elevatorSliderPiston']['state']);
-          setElevatorPivotPiston(data['elevatorPivotPiston']['state']);
-          setElevatorPosition(data['elevatorPosition']['state']);
-          setBattery(data['battery']);
-          setB0(data['controller']['button']['b0']);
-          setB1(data['controller']['button']['b1']);
-          setB2(data['controller']['button']['b2']);
-          setB3(data['controller']['button']['b3']);
-          setB4(data['controller']['button']['b4']);
-          setB5(data['controller']['button']['b5']);
-          setB6(data['controller']['button']['b6']);
-          setB7(data['controller']['button']['b7']);
-          setB8(data['controller']['button']['b8']);
-          setB9(data['controller']['button']['b9']);
-          setB10(data['controller']['button']['b10']);
-          setB11(data['controller']['button']['b11']);
-          setB12(data['controller']['button']['b12']);
-          setB13(data['controller']['button']['b13']);
-          setA0(data['controller']['axis']['a0']);
-          setA1(data['controller']['axis']['a1']);
-          setA2(data['controller']['axis']['a2']);
-          setA3(data['controller']['axis']['a3']);
-          setA4(data['controller']['axis']['a4']);
-          setA5(data['controller']['axis']['a5']);
-        })
-    };
-    const intervalId = setInterval(updateData, updateRate);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
   return (
     <div className="cardHolder">
       <div className="card">
@@ -158,34 +153,32 @@ const Diagnostics = () => {
         <h2 className="center">Button Mapping</h2>
         <center>
         <table style={{width: "fit-content"}}>
-          <tr>
-            <td>A0<div className="powerBar" style={{backgroundColor: (a0 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis0" style={{height: ((-a0*50) + 50) + "%"}}></div></div></td>
-            <td>A1<div className="powerBar" style={{backgroundColor: (a1 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis1" style={{height: ((-a1*50) + 50) + "%"}}></div></div></td>
-            <td>A2<div className="powerBar" style={{backgroundColor: (a2 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis2" style={{height: ((-a2*50) + 50) + "%"}}></div></div></td>
-            <td>A3<div className="powerBar" style={{backgroundColor: (a3 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis3" style={{height: ((-a3*50) + 50) + "%"}}></div></div></td>
-            <td>A4<div className="powerBar" style={{backgroundColor: (a4 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis4" style={{height: ((-a4*50) + 50) + "%"}}></div></div></td>
-            <td>A5<div className="powerBar" style={{backgroundColor: (a5 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis5" style={{height: ((-a5*50) + 50) + "%"}}></div></div></td>
-          </tr>
-          <tr>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b0)?("lightgreen"):(""), color: (b0)?("#111111"):("#dddddd")}}>B0</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b1)?("lightgreen"):(""), color: (b1)?("#111111"):("#dddddd")}}>B1</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b2)?("lightgreen"):(""), color: (b2)?("#111111"):("#dddddd")}}>B2</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b3)?("lightgreen"):(""), color: (b3)?("#111111"):("#dddddd")}}>B3</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b4)?("lightgreen"):(""), color: (b4)?("#111111"):("#dddddd")}}>B4</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b5)?("lightgreen"):(""), color: (b5)?("#111111"):("#dddddd")}}>B5</h5></td>
-          </tr>
-          <tr>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b6)?("lightgreen"):(""), color: (b6)?("#111111"):("#dddddd")}}>B6</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b7)?("lightgreen"):(""), color: (b7)?("#111111"):("#dddddd")}}>B7</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b8)?("lightgreen"):(""), color: (b8)?("#111111"):("#dddddd")}}>B8</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b9)?("lightgreen"):(""), color: (b9)?("#111111"):("#dddddd")}}>B9</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b10)?("lightgreen"):(""), color: (b10)?("#111111"):("#dddddd")}}>B10</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b11)?("lightgreen"):(""), color: (b11)?("#111111"):("#dddddd")}}>B11</h5></td>
-          </tr>
-          <tr>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b12)?("lightgreen"):(""), color: (b12)?("#111111"):("#dddddd")}}>B12</h5></td>
-            <td><h5 className="buttonMap center" style={{backgroundColor: (b13)?("lightgreen"):(""), color: (b13)?("#111111"):("#dddddd")}}>B13</h5></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>A0<div className="powerBar" style={{backgroundColor: (a0 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis0" style={{height: ((-a0*50) + 50) + "%"}}></div></div></td>
+              <td>A1<div className="powerBar" style={{backgroundColor: (a1 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis1" style={{height: ((-a1*50) + 50) + "%"}}></div></div></td>
+              <td>A2<div className="powerBar" style={{backgroundColor: (a2 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis2" style={{height: ((-a2*50) + 50) + "%"}}></div></div></td>
+              <td>A3<div className="powerBar" style={{backgroundColor: (a3 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis3" style={{height: ((-a3*50) + 50) + "%"}}></div></div></td>
+              <td>A4<div className="powerBar" style={{backgroundColor: (a4 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis4" style={{height: ((-a4*50) + 50) + "%"}}></div></div></td>
+              <td>A5<div className="powerBar" style={{backgroundColor: (a5 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis5" style={{height: ((-a5*50) + 50) + "%"}}></div></div></td>
+              <td>A6<div className="powerBar" style={{backgroundColor: (a6 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis5" style={{height: ((-a6*50) + 50) + "%"}}></div></div></td>
+              <td>A7<div className="powerBar" style={{backgroundColor: (a7 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis5" style={{height: ((-a7*50) + 50) + "%"}}></div></div></td>
+            </tr>
+            <tr>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b0)?("lightgreen"):(""), color: (b0)?("#111111"):("#dddddd")}}>B0</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b1)?("lightgreen"):(""), color: (b1)?("#111111"):("#dddddd")}}>B1</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b2)?("lightgreen"):(""), color: (b2)?("#111111"):("#dddddd")}}>B2</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b3)?("lightgreen"):(""), color: (b3)?("#111111"):("#dddddd")}}>B3</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b4)?("lightgreen"):(""), color: (b4)?("#111111"):("#dddddd")}}>B4</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b5)?("lightgreen"):(""), color: (b5)?("#111111"):("#dddddd")}}>B5</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b6)?("lightgreen"):(""), color: (b6)?("#111111"):("#dddddd")}}>B6</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b7)?("lightgreen"):(""), color: (b7)?("#111111"):("#dddddd")}}>B7</h5></td>
+            </tr>
+            <tr>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b8)?("lightgreen"):(""), color: (b8)?("#111111"):("#dddddd")}}>B8</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b9)?("lightgreen"):(""), color: (b9)?("#111111"):("#dddddd")}}>B9</h5></td>
+            </tr>
+          </tbody>
         </table>
         </center>
       </div>
