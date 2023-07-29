@@ -32,6 +32,7 @@ const Diagnostics = () => {
   const [b7, setB7] = useState(false);
   const [b8, setB8] = useState(false);
   const [b9, setB9] = useState(false);
+  const [b10, setB10] = useState(false);
   const [a0, setA0] = useState(0);
   const [a1, setA1] = useState(0);
   const [a2, setA2] = useState(0);
@@ -83,6 +84,7 @@ const Diagnostics = () => {
               setB7(newData['controller']['button']['b7']);
               setB8(newData['controller']['button']['b8']);
               setB9(newData['controller']['button']['b9']);
+              setB10(newData['controller']['button']['b10']);
               setA0(newData['controller']['axis']['a0']);
               setA1(newData['controller']['axis']['a1']);
               setA2(newData['controller']['axis']['a2']);
@@ -177,6 +179,7 @@ const Diagnostics = () => {
             <tr>
               <td><h5 className="buttonMap center" style={{backgroundColor: (b8)?("lightgreen"):(""), color: (b8)?("#111111"):("#dddddd")}}>B8</h5></td>
               <td><h5 className="buttonMap center" style={{backgroundColor: (b9)?("lightgreen"):(""), color: (b9)?("#111111"):("#dddddd")}}>B9</h5></td>
+              <td><h5 className="buttonMap center" style={{backgroundColor: (b10)?("lightgreen"):(""), color: (b10)?("#111111"):("#dddddd")}}>B10</h5></td>
             </tr>
           </tbody>
         </table>
