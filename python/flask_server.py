@@ -8,34 +8,38 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 app = flask.Flask(__name__)
-CORS(app)
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# allowed_origins = ['http://localhost:3000/']
-# cors = CORS(app, origins=allowed_origins)
-
-# limiter = Limiter(
-#     app=app,
-#     key_func=get_remote_address,
-#     default_limits=["200 per day", "50 per hour"]
-# )
+# CORS(app)
 
 run_already = False
 
+@app.route('/init')
+def init():
+    # global run_already
+    # if not run_already:
+    #     ros2_node.main()
+    #     run_already = True
+    ros2_node.main()
+    return jsonify('Server is initialized')
+
 @app.route('/')
-# @limiter.limit("1 per minute")
 def start():
-    global run_already
-    if not run_already:
-        ros2_node.main()
-        run_already = True
     return jsonify('Server is running')
 
-@app.route('/data', methods=['GET'])
-# @limiter.exempt
+@app.route('/metrics', methods=['POST'])
+def index():
+    return jsonify('Returning METRICS')
+
+@app.route('/metrics-payload-options')
+def payload():
+    return jsonify('Returning OPTIONS')
+
+@app.route('/query', methods=['GET', 'POST'])
 def getRos2Data():
     result = ros2_node.data
     resultArr = str(result).split('|')
-    jsonObj = [{
+    
+    # try:
+    jsonObj = {
         "fieldOriented": bool(resultArr[0]),
         "navx": float(resultArr[1]),
         "joystick": resultArr[2],
@@ -107,13 +111,15 @@ def getRos2Data():
                 "a7": float(resultArr[45]),
             }
         }
-    }]
+    }
+    # except:
+    #     return jsonify(result)
     
     # resp = flask.make_response(json.dumps(jsonObj))
     # resp.headers['Access-Control-Allow-Origin'] = '*'
     # resp.headers['X-Content-Type-Options'] = 'nosniff'
     
-    return json.dumps(jsonObj)
+    return jsonify(jsonObj)
     
 
 if __name__ == '__main__':

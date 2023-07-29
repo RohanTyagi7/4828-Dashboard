@@ -1,4 +1,5 @@
 import rclpy
+from rclpy.qos import QoSProfile
 from std_msgs.msg import String
 
 data = ""
