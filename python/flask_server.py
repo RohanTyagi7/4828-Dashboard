@@ -1,5 +1,4 @@
 import flask
-from AppOpener import open
 from flask import jsonify, request, make_response
 from flask_cors import CORS, cross_origin
 import ros2_node
@@ -7,6 +6,7 @@ import traceback
 import json
 import rticonnextdds_connector as rti
 import os
+import subprocess
 import inspect
 # from flask_limiter import Limiter
 # from flask_limiter.util import get_remote_address
@@ -41,7 +41,8 @@ def bool(string):
 def start():
     global run_already
     if not run_already:
-        open("System Monitor", "Task Manager", "Activity Monitor")
+        subprocess.call("gnome-system-monitor")
+        os.system("gnome-system-monitor")
         ros2_node.main()
         publish()
         run_already = True
