@@ -28,22 +28,43 @@ const Home = () => {
         console.log("INIT")
       })
   }, []);
-
+  useEffect(() => {
+    fetch('http://localhost:4000/data')
+      .then((response) => response.json())
+      .then((data) => {
+        try{
+          var newData = data[0];
+          setProfile(newData['profile']);
+          setAuton(newData['auton']);
+          document.getElementById('autonOpt').value = newData['auton'];
+          document.getElementById('profileOpt').value = newData['profile'].toLowerCase();
+          console.log("intend " + newData['profile'].toLowerCase());
+          console.log("outcome " + document.getElementById('profileOpt').value);
+        }
+        catch{
+          console.log("Introduction error. Code 1")
+        }
+      })
+  }, []);
   useEffect(() => {
     const intervalId = setInterval(() => {
           fetch('http://localhost:4000/data')
             .then((response) => response.json())
             .then((data) => {
-              var newData = data[0];
-              setFieldOriented(newData['fieldOriented']);
-              setNavx(newData['navx']);
-              setAutoTurn(newData['autoTurn']);
-              setSlowMode(newData['slowMode']);
-              setProfile(newData['profile']);
-              setAuton(newData['auton']);
-              setControlsConnected(newData['controlsConnected']);
-              setLed(newData['led']);
-              setTimeLeft(newData['timeLeft']);
+              try{
+                var newData = data[0];
+                setFieldOriented(newData['fieldOriented']);
+                setNavx(newData['navx']);
+                setAutoTurn(newData['autoTurn']);
+                setSlowMode(newData['slowMode']);
+                setJoystick(newData['joystick'])
+                setControlsConnected(newData['controlsConnected']);
+                setLed(newData['led']);
+                setTimeLeft(newData['timeLeft']);
+              }
+              catch{
+                console.log("introduction error. Code 1")
+              }
             })
     }, 100);
     return () => clearInterval(intervalId);
@@ -85,7 +106,7 @@ const Home = () => {
         <button onClick={(e)=>{setAutoTurn("score");}}>score</button>
         <button onClick={(e)=>{setAutoTurn("off");}}>off</button>*/}
       </div>
-      <div className="card tallCard" style={{ borderColor: (slowMode) ? ("#1c87c9") : ("lightgreen") }}>
+      <div className="card tallCard" style={{ borderColor: (slowMode == true) ? ("#1c87c9") : ("lightgreen") }}>
         <h2 className="center">Slow Mode</h2>
         {(slowMode) ? (<h3 className="center">Active</h3>) : (<h3 className="center">X</h3>)}
       </div>
@@ -109,12 +130,12 @@ const Home = () => {
         <div className="center">
           <select className="opt" id="autonOpt" onChange={(e) => { setAuton(document.getElementById('autonOpt').value); console.log(auton) }} style={{ borderColor: (auton.toLowerCase() != "none") ? ("lightgreen") : ("red") }}>
             <option value="None">None</option>
-            <option value="Cube High + Taxi">Cube High + Taxi</option>
-            <option value="Cone High + Taxi">Cone High + Taxi</option>
-            <option value="Cone High">Cone High</option>
-            <option value="Mid + Taxi">Mid + Taxi</option>
+            <option value="Cube High Taxi">Cube High + Taxi</option>
+            <option value="High Taxi">Cone High + Taxi</option>
+            <option value="High Place">Cone High</option>
+            <option value="Mid Taxi">Mid + Taxi</option>
             <option value="Mid Place">Mid Place</option>
-            <option value="Taxi">Taxi</option>
+            <option value="taxi">Taxi</option>
           </select>
         </div>
       </div>

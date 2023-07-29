@@ -1,11 +1,11 @@
 import flask
 from flask import jsonify, request, make_response
 from flask_cors import CORS, cross_origin
-import ros2_node
+#import ros2_node
 import traceback
 import json
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
+# from flask_limiter import Limiter
+# from flask_limiter.util import get_remote_address
 
 app = flask.Flask(__name__)
 CORS(app)
@@ -21,28 +21,32 @@ CORS(app)
 
 run_already = False
 
+def bool(string):
+    return string == "True"
+
 @app.route('/')
 # @limiter.limit("1 per minute")
 def start():
     global run_already
     if not run_already:
-        ros2_node.main()
+        #ros2_node.main()
         run_already = True
     return jsonify('Server is running')
 
 @app.route('/data', methods=['GET'])
 # @limiter.exempt
 def getRos2Data():
-    result = ros2_node.data
+    #result = ros2_node.data
+    result = "False|-0.0|xbox|off|False|Competition|High Place Auton|True|off|130|-0.0|0.0|-0.0|0.0|44.99999999999999|-45.0|-45.00000000000001|45.0|0.0|0.0|0.0|0.0|nan|True/-0.9|True/0.3|True/0.07|0.0|12.0|0|0|0|0|0|0|0|0|0|0|0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|"
     resultArr = str(result).split('|')
     jsonObj = [{
         "fieldOriented": bool(resultArr[0]),
-        "navx": float(resultArr[1]),
+        "navx": float(((180 - float(resultArr[1])*-1) + 180)%360),
         "joystick": resultArr[2],
         "autoTurn": resultArr[3],
         "slowMode": bool(resultArr[4]),
         "profile": resultArr[5],
-        "auton": resultArr[6],
+        "auton": resultArr[6].replace('Auton', '').strip(),
         "controlsConnected": bool(resultArr[7]),
         "led": resultArr[8],
         "timeLeft": float(resultArr[9]),
@@ -108,6 +112,8 @@ def getRos2Data():
             }
         }
     }]
+    if(jsonObj[0]['airTank']=="nan"):
+        jsonObj[0]['airTank'] = 0
     
     # resp = flask.make_response(json.dumps(jsonObj))
     # resp.headers['Access-Control-Allow-Origin'] = '*'

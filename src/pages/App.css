@@ -159,7 +159,7 @@ opt:focus, input:focus{
   rotate: 0deg;
   margin-top: 30px;
   rotate: 90deg;
-  border-image: linear-gradient(to right, #bbbbbb 50%, transparent 50%) 100% 1;
+  border-image: linear-gradient(to right, #bbbbbb 50%, #333333 50%) 100% 1;
   transition: all 0.3s ease-in-out;
 }
 .airBar{
