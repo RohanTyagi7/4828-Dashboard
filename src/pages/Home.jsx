@@ -145,7 +145,7 @@ const Home = () => {
       </div>
       <div className="card wideCard" style={{ borderColor: (controlsConnected) ? ("lightgreen") : ("red") }}>
         {(!controlsConnected) ? (<div className="error"></div>) : (<div></div>)}
-        <img alt="" src={(joystick == "xbox") ? (xbox) : (ps4)} style={{ cursor: "pointer", height: "100px", width: "100px", objectFit: "contain", float: "left" }} onClick={(e) => { if (joystick == "xbox") { setJoystick("ps4") } else { setJoystick("xbox") }}} />
+        <img alt="" src={(joystick == "xbox") ? (xbox) : (ps4)} style={{ cursor: "pointer", height: "100px", width: "100px", objectFit: "contain", float: "left" }} onClick={(e) => { if (joystick == "xbox") { setJoystick("ps4"); fetch('http://localhost:4000/joystick?type=ps4') } else { setJoystick("xbox"); fetch('http://localhost:4000/joystick?type=xbox') }}} />
         <h2 className="center verticalCenter" style={{ color: (controlsConnected) ? ("#dddddd") : ("red"), marginTop: "30px" }}>{(controlsConnected) ? ("Connected") : ("NOT CONNECTED")}</h2>
       </div>
       <div className="card wideCard">

@@ -177,7 +177,7 @@ def joystick():
         return jsonify('Error setting joystick to ' + type)
     
 def publish():
-    ros2_node.out = f"{auton_val}|{profile_val}|{led_val}"
+    ros2_node.out = f"{auton_val}|{profile_val}|{led_val}|{joystick_val}"
     
 
 if __name__ == '__main__':
