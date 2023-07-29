@@ -15,8 +15,8 @@ const Home = () => {
   const [joystick, setJoystick] = useState("xbox");
   const [autoTurn, setAutoTurn] = useState("off");
   const [slowMode, setSlowMode] = useState(false);
-  const [profile, setProfile] = useState("workshop");
-  const [auton, setAuton] = useState("None");
+  const [profile, setProfile] = useState("workshop"); //add push
+  const [auton, setAuton] = useState("None"); //add push
   const [controlsConnected, setControlsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
@@ -24,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     if(sessionStorage.getItem('init') != 'true'){
-      fetch('127.0.0.1::4000/')
+      fetch('http://localhost:4000/')
       .then((response) => response.json())
       .then((data) => {
         console.log("INIT")
@@ -34,7 +34,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    fetch('127.0.0.1:4000/data')
+    fetch('http://localhost:4000/data')
       .then((response) => response.json())
       .then((data) => {
           if(data['text'] != "Error"){
@@ -57,7 +57,7 @@ const Home = () => {
   }, []);
   useEffect(() => {
     const intervalId = setInterval(() => {
-          fetch('127.0.0.1:4000/data')
+          fetch('http://localhost:4000/data')
             .then((response) => response.json())
             .then((data) => {
               if(data['text'] != "Error"){
