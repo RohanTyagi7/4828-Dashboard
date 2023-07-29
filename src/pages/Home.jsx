@@ -76,7 +76,7 @@ const Home = () => {
               }
             })
           
-    }, 100);
+    }, 20);
     return () => clearInterval(intervalId);
   }, []);
 

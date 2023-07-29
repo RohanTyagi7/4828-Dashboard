@@ -103,7 +103,7 @@ const Diagnostics = () => {
               }
               
             })
-    }, 100);
+    }, 20);
     return () => clearInterval(intervalId);
   }, []);
 
