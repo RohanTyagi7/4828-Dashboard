@@ -3,6 +3,7 @@ body, select{
   background-color: #222222;
   color: #dddddd;
   font-family: 'Raleway', sans-serif;
+  overflow-x: hidden;
 }
 .center{
   text-align: center;
