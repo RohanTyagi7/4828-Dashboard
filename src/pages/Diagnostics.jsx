@@ -55,7 +55,7 @@ const Diagnostics = () => {
           fetch('http://localhost:4000/data')
             .then((response) => response.json())
             .then((data) => {
-              if(data != "Error"){
+              if(data['text'] != "Error"){
                 var newData = data[0];
                 setSwerveFrontLeftSpeed(newData['swerve']['frontLeft']['speed']);
                 setSwerveFrontRightSpeed(newData['swerve']['frontRight']['speed']);

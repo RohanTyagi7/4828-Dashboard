@@ -36,7 +36,7 @@ const Home = () => {
     fetch('http://localhost:4000/data')
       .then((response) => response.json())
       .then((data) => {
-          if(data != "Error"){
+          if(data['text'] != "Error"){
             console.log(data)
             var newData = data[0];
             setProfile(newData['profile']);
@@ -59,7 +59,7 @@ const Home = () => {
             .then((response) => response.json())
             .then((data) => {
               console.log("hello world")
-              if(data != "Error"){
+              if(data['text'] != "Error"){
                 var newData = data[0];
                 setFieldOriented(newData['fieldOriented']);
                 setNavx(newData['navx']);

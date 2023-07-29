@@ -50,7 +50,7 @@ def start():
 def getRos2Data():
     result = ros2_node.data
     if len(result) < 5:
-        return "Error"
+        return {"text": "Error"}
     #result = "False|-0.0|xbox|off|False|Competition|High Place Auton|True|off|130|-0.0|0.0|-0.0|0.0|44.99999999999999|-45.0|-45.00000000000001|45.0|0.0|0.0|0.0|0.0|nan|True/-0.9|True/0.3|True/0.07|0.0|12.0|0|0|0|0|0|0|0|0|0|0|0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|"
     resultArr = str(result).split('|')
     jsonObj = [{
