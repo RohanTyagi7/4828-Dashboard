@@ -41,7 +41,7 @@ const Diagnostics = () => {
   const [a5, setA5] = useState(0);
   const [a6, setA6] = useState(0);
   const [a7, setA7] = useState(0);
-  const [probelm, setProblem] = useState(false);
+  const [problem, setProblem] = useState(false);
 
   // useEffect(() => {
   //   fetch('http://localhost:4000/')
