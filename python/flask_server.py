@@ -33,7 +33,7 @@ led_val = "off"
 joystick_val = "xbox"
 
 def bool(string):
-    return string == "True"
+    return string == "True" or string == 1
 
 @app.route('/')
 # @limiter.limit("1 per minute")
