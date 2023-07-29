@@ -163,8 +163,8 @@ const Diagnostics = () => {
               <td>A3<div className="powerBar" style={{backgroundColor: (a3 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis3" style={{height: ((-a3*50) + 50) + "%"}}></div></div></td>
               <td>A4<div className="powerBar" style={{backgroundColor: (a4 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis4" style={{height: ((-a4*50) + 50) + "%"}}></div></div></td>
               <td>A5<div className="powerBar" style={{backgroundColor: (a5 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis5" style={{height: ((-a5*50) + 50) + "%"}}></div></div></td>
-              <td>A6<div className="powerBar" style={{backgroundColor: (a6 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis5" style={{height: ((-a6*50) + 50) + "%"}}></div></div></td>
-              <td>A7<div className="powerBar" style={{backgroundColor: (a7 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis5" style={{height: ((-a7*50) + 50) + "%"}}></div></div></td>
+              <td>A6<div className="powerBar" style={{backgroundColor: (a6 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis6" style={{height: ((-a6*50) + 50) + "%"}}></div></div></td>
+              <td>A7<div className="powerBar" style={{backgroundColor: (a7 < -0.05)?("#1c87c9"):("lightgreen")}}><div className="fillPowerBar" id="axis7" style={{height: ((-a7*50) + 50) + "%"}}></div></div></td>
             </tr>
             <tr>
               <td><h5 className="buttonMap center" style={{backgroundColor: (b0)?("lightgreen"):(""), color: (b0)?("#111111"):("#dddddd")}}>B0</h5></td>
