@@ -36,20 +36,20 @@ const Home = () => {
     fetch('http://localhost:4000/data')
       .then((response) => response.json())
       .then((data) => {
-        try{
-          console.log(data)
-          var newData = data[0];
-          setProfile(newData['profile']);
-          setAuton(newData['auton']);
-          setLed(newData['led']);
-          setJoystick(newData['joystick'])
-          document.getElementById('autonOpt').value = newData['auton'];
-          document.getElementById('profileOpt').value = newData['profile'].toLowerCase();
-          console.log("intend " + newData['profile'].toLowerCase());
-          console.log("outcome " + document.getElementById('profileOpt').value);
-        }
-        catch{
-          console.log("Introduction error. Code 1")
+          if(data != "Error"){
+            console.log(data)
+            var newData = data[0];
+            setProfile(newData['profile']);
+            setAuton(newData['auton']);
+            setLed(newData['led']);
+            setJoystick(newData['joystick'])
+            document.getElementById('autonOpt').value = newData['auton'];
+            document.getElementById('profileOpt').value = newData['profile'].toLowerCase();
+            console.log("intend " + newData['profile'].toLowerCase());
+            console.log("outcome " + document.getElementById('profileOpt').value);
+          }
+        else{
+          console.log("Consumption error. Code 2")
         }
       })
   }, []);
@@ -58,7 +58,7 @@ const Home = () => {
           fetch('http://localhost:4000/data')
             .then((response) => response.json())
             .then((data) => {
-              try{
+              if(data != "Error"){
                 var newData = data[0];
                 setFieldOriented(newData['fieldOriented']);
                 setNavx(newData['navx']);
@@ -67,10 +67,11 @@ const Home = () => {
                 setControlsConnected(newData['controlsConnected']);
                 setTimeLeft(newData['timeLeft']);
               }
-              catch{
-                console.log("introduction error. Code 1")
+              else{
+                console.log("Consumption error. Code 2")
               }
             })
+          
     }, 100);
     return () => clearInterval(intervalId);
   }, []);

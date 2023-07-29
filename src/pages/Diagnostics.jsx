@@ -55,44 +55,50 @@ const Diagnostics = () => {
           fetch('http://localhost:4000/data')
             .then((response) => response.json())
             .then((data) => {
-              var newData = data[0];
-              setSwerveFrontLeftSpeed(newData['swerve']['frontLeft']['speed']);
-              setSwerveFrontRightSpeed(newData['swerve']['frontRight']['speed']);
-              setSwerveBackLeftSpeed(newData['swerve']['backLeft']['speed']);
-              setSwerveBackRightSpeed(newData['swerve']['backRight']['speed']);
-              setSwerveFrontLeftDirection(newData['swerve']['frontLeft']['direction']);
-              setSwerveFrontRightDirection(newData['swerve']['frontRight']['direction']);
-              setSwerveBackLeftDirection(newData['swerve']['backLeft']['direction']);
-              setSwerveBackRightDirection(newData['swerve']['backRight']['direction']);
-              setSwerveFrontLeftTemperature(newData['swerve']['frontLeft']['temperature']);
-              setSwerveFrontRightTemperature(newData['swerve']['frontRight']['temperature']);
-              setSwerveBackLeftTemperature(newData['swerve']['backLeft']['temperature']);
-              setSwerveBackRightTemperature(newData['swerve']['backRight']['temperature']);
-              setAirTank(newData['airTank']);
-              setIntakePiston(newData['intakePiston']['state']);
-              setElevatorSliderPiston(newData['elevatorSliderPiston']['state']);
-              setElevatorPivotPiston(newData['elevatorPivotPiston']['state']);
-              setElevatorPosition(newData['elevatorPosition']);
-              setBattery(newData['battery']);
-              setB0(newData['controller']['button']['b0']);
-              setB1(newData['controller']['button']['b1']);
-              setB2(newData['controller']['button']['b2']);
-              setB3(newData['controller']['button']['b3']);
-              setB4(newData['controller']['button']['b4']);
-              setB5(newData['controller']['button']['b5']);
-              setB6(newData['controller']['button']['b6']);
-              setB7(newData['controller']['button']['b7']);
-              setB8(newData['controller']['button']['b8']);
-              setB9(newData['controller']['button']['b9']);
-              setB10(newData['controller']['button']['b10']);
-              setA0(newData['controller']['axis']['a0']);
-              setA1(newData['controller']['axis']['a1']);
-              setA2(newData['controller']['axis']['a2']);
-              setA3(newData['controller']['axis']['a3']);
-              setA4(newData['controller']['axis']['a4']);
-              setA5(newData['controller']['axis']['a5']);
-              setA6(newData['controller']['axis']['a5']);
-              setA7(newData['controller']['axis']['a5']);
+              if(data != "Error"){
+                var newData = data[0];
+                setSwerveFrontLeftSpeed(newData['swerve']['frontLeft']['speed']);
+                setSwerveFrontRightSpeed(newData['swerve']['frontRight']['speed']);
+                setSwerveBackLeftSpeed(newData['swerve']['backLeft']['speed']);
+                setSwerveBackRightSpeed(newData['swerve']['backRight']['speed']);
+                setSwerveFrontLeftDirection(newData['swerve']['frontLeft']['direction']);
+                setSwerveFrontRightDirection(newData['swerve']['frontRight']['direction']);
+                setSwerveBackLeftDirection(newData['swerve']['backLeft']['direction']);
+                setSwerveBackRightDirection(newData['swerve']['backRight']['direction']);
+                setSwerveFrontLeftTemperature(newData['swerve']['frontLeft']['temperature']);
+                setSwerveFrontRightTemperature(newData['swerve']['frontRight']['temperature']);
+                setSwerveBackLeftTemperature(newData['swerve']['backLeft']['temperature']);
+                setSwerveBackRightTemperature(newData['swerve']['backRight']['temperature']);
+                setAirTank(newData['airTank']);
+                setIntakePiston(newData['intakePiston']['state']);
+                setElevatorSliderPiston(newData['elevatorSliderPiston']['state']);
+                setElevatorPivotPiston(newData['elevatorPivotPiston']['state']);
+                setElevatorPosition(newData['elevatorPosition']);
+                setBattery(newData['battery']);
+                setB0(newData['controller']['button']['b0']);
+                setB1(newData['controller']['button']['b1']);
+                setB2(newData['controller']['button']['b2']);
+                setB3(newData['controller']['button']['b3']);
+                setB4(newData['controller']['button']['b4']);
+                setB5(newData['controller']['button']['b5']);
+                setB6(newData['controller']['button']['b6']);
+                setB7(newData['controller']['button']['b7']);
+                setB8(newData['controller']['button']['b8']);
+                setB9(newData['controller']['button']['b9']);
+                setB10(newData['controller']['button']['b10']);
+                setA0(newData['controller']['axis']['a0']);
+                setA1(newData['controller']['axis']['a1']);
+                setA2(newData['controller']['axis']['a2']);
+                setA3(newData['controller']['axis']['a3']);
+                setA4(newData['controller']['axis']['a4']);
+                setA5(newData['controller']['axis']['a5']);
+                setA6(newData['controller']['axis']['a5']);
+                setA7(newData['controller']['axis']['a5']);
+              }
+              else{
+                console.log("Consumption error. Code 2")
+              }
+              
             })
     }, 100);
     return () => clearInterval(intervalId);
