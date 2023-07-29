@@ -15,8 +15,8 @@ const Home = () => {
   const [joystick, setJoystick] = useState("xbox");
   const [autoTurn, setAutoTurn] = useState("off");
   const [slowMode, setSlowMode] = useState(false);
-  const [profile, setProfile] = useState("workshop"); //add push
-  const [auton, setAuton] = useState("None"); //add push
+  const [profile, setProfile] = useState("workshop");
+  const [auton, setAuton] = useState("None");
   const [controlsConnected, setControlsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
