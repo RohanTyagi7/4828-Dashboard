@@ -20,6 +20,7 @@ const Home = () => {
   const [controlsConnected, setControlsConnected] = useState(false);
   const [led, setLed] = useState("off");
   const [timeLeft, setTimeLeft] = useState(130);
+  const [problem, setProblem] = useState(false);
 
   useEffect(() => {
     if(sessionStorage.getItem('init') != 'true'){
@@ -37,7 +38,6 @@ const Home = () => {
       .then((response) => response.json())
       .then((data) => {
           if(data['text'] != "Error"){
-            console.log(data)
             var newData = data[0];
             setProfile(newData['profile']);
             setAuton(newData['auton']);
@@ -47,9 +47,11 @@ const Home = () => {
             document.getElementById('profileOpt').value = newData['profile'].toLowerCase();
             console.log("intend " + newData['profile'].toLowerCase());
             console.log("outcome " + document.getElementById('profileOpt').value);
+            setProblem(false)
           }
         else{
           console.log("Consumption error. Code 2")
+          setProblem(true)
         }
       })
   }, []);
@@ -58,7 +60,6 @@ const Home = () => {
           fetch('http://localhost:4000/data')
             .then((response) => response.json())
             .then((data) => {
-              console.log("hello world")
               if(data['text'] != "Error"){
                 var newData = data[0];
                 setFieldOriented(newData['fieldOriented']);
@@ -67,9 +68,11 @@ const Home = () => {
                 setSlowMode(newData['slowMode']);
                 setControlsConnected(newData['controlsConnected']);
                 setTimeLeft(newData['timeLeft']);
+                setProblem(false)
               }
               else{
                 console.log("Consumption error. Code 2")
+                setProblem(true)
               }
             })
           
@@ -99,7 +102,7 @@ const Home = () => {
   //   };
   // }, []);
   return (
-    <div className="cardHolder">
+    <div className="cardHolder" style={{backgroundColor: (problem)?("red"):("")}}>
       <div className="bigCard card">
         <div style={{ float: "left" }}>
           <div className="navxChart"><div className="navxBar" style={{ rotate: (navx + 90 + "deg") }}></div><div className="navxPredictionBar" style={{ display: (autoTurn.toLowerCase() == "off") ? ("none") : ("block"), rotate: (autoTurn.toLowerCase() == "load") ? ("90deg") : ("-90deg") }}></div></div>

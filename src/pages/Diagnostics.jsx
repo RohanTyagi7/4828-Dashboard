@@ -41,6 +41,7 @@ const Diagnostics = () => {
   const [a5, setA5] = useState(0);
   const [a6, setA6] = useState(0);
   const [a7, setA7] = useState(0);
+  const [probelm, setProblem] = useState(false);
 
   // useEffect(() => {
   //   fetch('http://localhost:4000/')
@@ -94,9 +95,11 @@ const Diagnostics = () => {
                 setA5(newData['controller']['axis']['a5']);
                 setA6(newData['controller']['axis']['a5']);
                 setA7(newData['controller']['axis']['a5']);
+                setProblem(false)
               }
               else{
                 console.log("Consumption error. Code 2")
+                setProblem(true)
               }
               
             })
@@ -105,7 +108,7 @@ const Diagnostics = () => {
   }, []);
 
   return (
-    <div className="cardHolder">
+    <div className="cardHolder" style={{backgroundColor: (problem)?("red"):("")}}> 
       <div className="card">
         <h2 className="center">Swerve Movement</h2>
           <div>
