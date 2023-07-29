@@ -93,8 +93,8 @@ const Diagnostics = () => {
                 setA3(newData['controller']['axis']['a3']);
                 setA4(newData['controller']['axis']['a4']);
                 setA5(newData['controller']['axis']['a5']);
-                setA6(newData['controller']['axis']['a5']);
-                setA7(newData['controller']['axis']['a5']);
+                setA6(newData['controller']['axis']['a6']);
+                setA7(newData['controller']['axis']['a7']);
                 setProblem(false)
               }
               else{
