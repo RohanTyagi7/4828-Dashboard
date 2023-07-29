@@ -17,31 +17,11 @@ This code contains trade secrets of Real-Time Innovations, Inc.
 
     <!-- types -->
     <types>
-      <include file="Header.xml"/>
       <module name="std_msgs">
         <module name="msg">
           <module name="dds_">
             <struct name="String_">
               <member name="data" type="string" stringMaxLength="255"/>
-            </struct>
-          </module>
-        </module>
-      </module>
-      <module name="sensor_msgs">
-        <module name="msg">
-          <module name="dds_">
-            <struct name="Joy_">
-              <member name="header" type= "nonBasic" nonBasicTypeName="std_msgs::msg::Header"/>
-              <member name="axes" type="float32" sequenceMaxLength="100"/>
-              <member name="buttons" type="int32" sequenceMaxLength="100"/>
-            </struct>
-
-            <struct name= "JointState_">
-              <member name="header" type= "nonBasic" nonBasicTypeName="std_msgs::msg::Header"/>
-              <member name="name" sequenceMaxLength="100" stringMaxLength="255" type="string"/>
-              <member name="position" sequenceMaxLength="100" type="float64"/>
-              <member name="velocity" sequenceMaxLength="100" type="float64"/>
-              <member name="effort" sequenceMaxLength="100" type="float64"/>
             </struct>
           </module>
         </module>
@@ -52,15 +32,15 @@ This code contains trade secrets of Real-Time Innovations, Inc.
     <domain_library name="ROS2_DOMAIN_LIB">
         <domain name="ROS2_DOMAIN_DASHBOARD" domain_id="0">
           <register_type name="std_msgs::msg::dds_::String_" type_ref="std_msgs::msg::dds_::String_" />
-          <topic name="dashboard_data" register_type_ref="std_msgs::msg::dds_::String_"/>
+          <topic name="rt/dashboard_pub" register_type_ref="std_msgs::msg::dds_::String_"/>
         </domain>
     </domain_library>
 
     <!-- Participant library -->
     <domain_participant_library name="ROS2_PARTICIPANT_LIB">
-      <domain_participant name="dashboard_subscriber" domain_ref="ROS2_DOMAIN_LIB::ROS2_DOMAIN_DASHBOARD">
-        <subscriber name="dasboard_data_subscriber">
-            <data_reader name="dashboard_reader" topic_ref="dashboard_data" />
+      <domain_participant name="dashboard_publisher" domain_ref="ROS2_DOMAIN_LIB::ROS2_DOMAIN_DASHBOARD">
+        <subscriber name="dasboard_data_publisher">
+            <data_reader name="dashboard_writer" topic_ref="rt/dashboard_pub" />
         </subscriber>
       </domain_participant>
     </domain_participant_library>

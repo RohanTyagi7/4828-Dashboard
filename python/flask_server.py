@@ -4,6 +4,9 @@ from flask_cors import CORS, cross_origin
 import ros2_node
 import traceback
 import json
+import rticonnextdds_connector as rti
+import os
+import inspect
 # from flask_limiter import Limiter
 # from flask_limiter.util import get_remote_address
 
@@ -19,7 +22,14 @@ CORS(app)
 #     default_limits=["200 per day", "50 per hour"]
 # )
 
+curr_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+xml_path = os.path.join(curr_path, "../src/xml/rticonf.xml")
+
 run_already = False
+
+auton_val = "None"
+profile_val = "Workshop"
+led_val = "off"
 
 def bool(string):
     return string == "True"
@@ -121,27 +131,42 @@ def getRos2Data():
     
     return json.dumps(jsonObj)
     
-@app.route('/profile/<string:type>')
-def profile(type: str):
+@app.route('/profile')
+def profile():
+    type = request.args.get('type')
     try:
+        global profile_val
+        profile_val = str(type)
+        publish()
         return jsonify('200 OK')
     except:
         return jsonify('Error setting profile to ' + type)
     
-@app.route('/auton/<string:type>')
-def auton(type: str):
+@app.route('/auton/')
+def auton():
+    type = request.args.get('type')
     try:
+        global auton_val
+        auton_val = str(type)
+        publish()
         return jsonify('200 OK')
     except:
         return jsonify('Error setting auton to ' + type)
     
-@app.route('/led/<string:type>')
-def led(type: str):
+@app.route('/led')
+def led():
+    type = request.args.get('type')
     try:
+        global led_val
+        led_val = type
+        publish()
         return jsonify('200 OK')
     except:
         return jsonify('Error setting led to ' + type)
     
+def publish():
+    ros2_node.out = f"{auton_val}|{profile_val}|{led_val}"
+    
 
 if __name__ == '__main__':
-    app.run(port=4000, debug=True)
+    app.run(port=4000, debug=True, threaded=True)

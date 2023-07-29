@@ -118,7 +118,7 @@ const Home = () => {
       <div className="card">
         <h2 className="center">{profile.substring(0, 1).toUpperCase() + profile.substring(1)} Profile</h2>
         <div className="center">
-          <select className="opt" id="profileOpt" style={{ borderBottomColor: (profile == "workshop") ? ("#1c87c9") : ("lightgreen") }} onChange={(e) => { setProfile(document.getElementById('profileOpt').value); fetch('http://localhost:4000/profile/' + document.getElementById('profileOpt').value) }}>
+          <select className="opt" id="profileOpt" style={{ borderBottomColor: (profile == "workshop") ? ("#1c87c9") : ("lightgreen") }} onChange={(e) => { setProfile(document.getElementById('profileOpt').value); fetch('http://localhost:4000/profile?type=' + document.getElementById('profileOpt').value) }}>
             <option value="workshop">Workshop</option>
             <option value="competition">Competition</option>
           </select>
@@ -128,7 +128,7 @@ const Home = () => {
         {(auton.toLowerCase() == "none") ? (<div className="error"></div>) : (<div></div>)}
         <h2 className="center">Autonomous</h2>
         <div className="center">
-          <select className="opt" id="autonOpt" onChange={(e) => { setAuton(document.getElementById('autonOpt').value); fetch('http://localhost:4000/auton/' + document.getElementById('autonOpt').value)  }} style={{ borderColor: (auton.toLowerCase() != "none") ? ("lightgreen") : ("red") }}>
+          <select className="opt" id="autonOpt" onChange={(e) => { setAuton(document.getElementById('autonOpt').value); fetch('http://localhost:4000/auton?type=' + document.getElementById('autonOpt').value)  }} style={{ borderColor: (auton.toLowerCase() != "none") ? ("lightgreen") : ("red") }}>
             <option value="None">None</option>
             <option value="Cube High Taxi">Cube High + Taxi</option>
             <option value="High Taxi">Cone High + Taxi</option>
@@ -150,9 +150,9 @@ const Home = () => {
       </div>
       <div className="card wideCard" style={{ borderColor: (led.toLowerCase() != "off") ? (led) : ("lightgreen") }}>
         <h2 className="center">LED</h2>
-        <img alt="" src={cone} style={{ height: "100px", marginLeft: "5%" }} onClick={(e) => { setLed("yellow"); fetch('http://localhost:4000/led/yellow')  }} />
-        <img alt="" src={none} style={{ height: "100px", marginLeft: "22%" }} onClick={(e) => { setLed("off"); fetch('http://localhost:4000/led/off')  }} />
-        <img alt="" src={cube} style={{ height: "100px", marginLeft: "18%" }} onClick={(e) => { setLed("purple"); fetch('http://localhost:4000/led/purple')  }} />
+        <img alt="" src={cone} style={{ height: "100px", marginLeft: "5%" }} onClick={(e) => { setLed("yellow"); fetch('http://localhost:4000/led?type=yellow')  }} />
+        <img alt="" src={none} style={{ height: "100px", marginLeft: "22%" }} onClick={(e) => { setLed("off"); fetch('http://localhost:4000/led?type=off')  }} />
+        <img alt="" src={cube} style={{ height: "100px", marginLeft: "18%" }} onClick={(e) => { setLed("purple"); fetch('http://localhost:4000/led?type=purple')  }} />
       </div>
         <div className="blink" style={{marginTop: "-10px", height: "20px", width: "100vw", backgroundColor: (led.toLowerCase() != "off")?(led):(""), marginLeft: "-7px"}}></div>
     </div>
