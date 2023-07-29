@@ -189,3 +189,7 @@ opt:focus, input:focus{
     opacity: 0;
   }
 }
+iframe
+{
+    display: none;
+}
