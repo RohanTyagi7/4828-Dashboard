@@ -31,7 +31,7 @@ const Home = () => {
       })
     }
   }, []);
-  
+
   useEffect(() => {
     fetch('http://localhost:4000/data')
       .then((response) => response.json())
@@ -41,6 +41,7 @@ const Home = () => {
           setProfile(newData['profile']);
           setAuton(newData['auton']);
           setLed(newData['led']);
+          setJoystick(newData['joystick'])
           document.getElementById('autonOpt').value = newData['auton'];
           document.getElementById('profileOpt').value = newData['profile'].toLowerCase();
           console.log("intend " + newData['profile'].toLowerCase());
@@ -62,7 +63,6 @@ const Home = () => {
                 setNavx(newData['navx']);
                 setAutoTurn(newData['autoTurn']);
                 setSlowMode(newData['slowMode']);
-                setJoystick(newData['joystick'])
                 setControlsConnected(newData['controlsConnected']);
                 setTimeLeft(newData['timeLeft']);
               }

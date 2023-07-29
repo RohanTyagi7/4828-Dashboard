@@ -30,6 +30,7 @@ run_already = False
 auton_val = "None"
 profile_val = "Workshop"
 led_val = "off"
+joystick_val = "xbox"
 
 def bool(string):
     return string == "True"
@@ -163,6 +164,17 @@ def led():
         return jsonify('200 OK')
     except:
         return jsonify('Error setting led to ' + type)
+    
+@app.route('/joystick')
+def joystick():
+    type = request.args.get('type')
+    try:
+        global joystick_val
+        joystick_val = type
+        publish()
+        return jsonify('200 OK')
+    except:
+        return jsonify('Error setting joystick to ' + type)
     
 def publish():
     ros2_node.out = f"{auton_val}|{profile_val}|{led_val}"
