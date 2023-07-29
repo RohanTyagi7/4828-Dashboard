@@ -101,21 +101,21 @@ const Diagnostics = () => {
       <div className="card">
         <h2 className="center">Swerve Movement</h2>
           <div>
-          <div className="powerBar" style={{backgroundColor: (swerveFrontLeftSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (swerveFrontLeftSpeed*10+50) + "%"}}></div></div>
+          <div className="powerBar" style={{backgroundColor: (swerveFrontLeftSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (-swerveFrontLeftSpeed*10+50) + "%"}}></div></div>
           <div className="swerveAngle"><div className="sweveAngleBar" style={{rotate: (swerveFrontLeftDirection + 90 + "deg")}}></div></div>
         </div>
         <div>
           <div className="swerveAngle"><div className="sweveAngleBar" style={{rotate: (swerveFrontRightDirection + 90 + "deg")}}></div></div>
-          <div className="powerBar" style={{backgroundColor: (swerveFrontRightSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (swerveFrontRightSpeed*10+50) + "%"}}></div></div>
+          <div className="powerBar" style={{backgroundColor: (swerveFrontRightSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (-swerveFrontRightSpeed*10+50) + "%"}}></div></div>
         </div>
         <br></br><br></br><br></br><br></br><br></br>
         <div>
-          <div className="powerBar" style={{backgroundColor: (swerveBackLeftSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (swerveBackLeftSpeed*10+50) + "%"}}></div></div>
+          <div className="powerBar" style={{backgroundColor: (swerveBackLeftSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (-swerveBackLeftSpeed*10+50) + "%"}}></div></div>
           <div className="swerveAngle"><div className="sweveAngleBar" style={{rotate: (swerveBackLeftDirection + 90 + "deg")}}></div></div>
         </div>
         <div>
           <div className="swerveAngle"><div className="sweveAngleBar" style={{rotate: (swerveBackRightDirection + 90 + "deg")}}></div></div>
-          <div className="powerBar" style={{backgroundColor: (swerveBackRightSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (swerveBackRightSpeed*10+50) + "%"}}></div></div>
+          <div className="powerBar" style={{backgroundColor: (swerveBackRightSpeed == 0)?("#1c87c9"):("")}}><div className="fillPowerBar" style={{height: (-swerveBackRightSpeed*10+50) + "%"}}></div></div>
           
         </div>
       </div>
