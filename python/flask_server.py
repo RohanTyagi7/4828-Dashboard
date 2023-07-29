@@ -41,6 +41,7 @@ def start():
     global run_already
     if not run_already:
         ros2_node.main()
+        publish()
         run_already = True
     return jsonify('Server is running')
 
@@ -112,16 +113,17 @@ def getRos2Data():
                 "b7": bool(float(resultArr[35])),
                 "b8": bool(float(resultArr[36])),
                 "b9": bool(float(resultArr[37])),
+                "b10": bool(float(resultArr[38])),
             },
             "axis": {
-                "a0": float(resultArr[38]),
-                "a1": float(resultArr[39]),
-                "a2": float(resultArr[40]),
-                "a3": float(resultArr[41]),
-                "a4": float(resultArr[42]),
-                "a5": float(resultArr[43]),
-                "a6": float(resultArr[44]),
-                "a7": float(resultArr[45]),
+                "a0": float(resultArr[39]),
+                "a1": float(resultArr[40]),
+                "a2": float(resultArr[41]),
+                "a3": float(resultArr[42]),
+                "a4": float(resultArr[43]),
+                "a5": float(resultArr[44]),
+                "a6": float(resultArr[45]),
+                "a7": float(resultArr[46]),
             }
         }
     }]
