@@ -22,12 +22,16 @@ const Home = () => {
   const [timeLeft, setTimeLeft] = useState(130);
 
   useEffect(() => {
-    fetch('http://localhost:4000/')
+    if(sessionStorage.getItem('init') != 'true'){
+      fetch('http://localhost:4000/')
       .then((response) => response.json())
       .then((data) => {
         console.log("INIT")
+        sessionStorage.setItem('init', "true")
       })
+    }
   }, []);
+  
   useEffect(() => {
     fetch('http://localhost:4000/data')
       .then((response) => response.json())
