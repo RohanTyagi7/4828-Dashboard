@@ -1,4 +1,5 @@
 import flask
+from AppOpener import open
 from flask import jsonify, request, make_response
 from flask_cors import CORS, cross_origin
 import ros2_node
@@ -40,6 +41,7 @@ def bool(string):
 def start():
     global run_already
     if not run_already:
+        open("System Monitor", "Task Manager", "Activity Monitor")
         ros2_node.main()
         publish()
         run_already = True
