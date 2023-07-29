@@ -37,6 +37,7 @@ const Home = () => {
       .then((response) => response.json())
       .then((data) => {
         try{
+          console.log(data)
           var newData = data[0];
           setProfile(newData['profile']);
           setAuton(newData['auton']);
