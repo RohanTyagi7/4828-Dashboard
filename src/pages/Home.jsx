@@ -58,6 +58,7 @@ const Home = () => {
           fetch('http://localhost:4000/data')
             .then((response) => response.json())
             .then((data) => {
+              console.log(data)
               if(data != "Error"){
                 var newData = data[0];
                 setFieldOriented(newData['fieldOriented']);
