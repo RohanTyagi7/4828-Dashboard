@@ -1,7 +1,7 @@
 import flask
 from flask import jsonify, request, make_response
 from flask_cors import CORS, cross_origin
-#import ros2_node
+import ros2_node
 import traceback
 import json
 # from flask_limiter import Limiter
@@ -29,15 +29,15 @@ def bool(string):
 def start():
     global run_already
     if not run_already:
-        #ros2_node.main()
+        ros2_node.main()
         run_already = True
     return jsonify('Server is running')
 
 @app.route('/data', methods=['GET'])
 # @limiter.exempt
 def getRos2Data():
-    #result = ros2_node.data
-    result = "False|-0.0|xbox|off|False|Competition|High Place Auton|True|off|130|-0.0|0.0|-0.0|0.0|44.99999999999999|-45.0|-45.00000000000001|45.0|0.0|0.0|0.0|0.0|nan|True/-0.9|True/0.3|True/0.07|0.0|12.0|0|0|0|0|0|0|0|0|0|0|0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|"
+    result = ros2_node.data
+    #result = "False|-0.0|xbox|off|False|Competition|High Place Auton|True|off|130|-0.0|0.0|-0.0|0.0|44.99999999999999|-45.0|-45.00000000000001|45.0|0.0|0.0|0.0|0.0|nan|True/-0.9|True/0.3|True/0.07|0.0|12.0|0|0|0|0|0|0|0|0|0|0|0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|"
     resultArr = str(result).split('|')
     jsonObj = [{
         "fieldOriented": bool(resultArr[0]),
