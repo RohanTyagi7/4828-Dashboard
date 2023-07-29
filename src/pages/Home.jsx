@@ -24,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     if(sessionStorage.getItem('init') != 'true'){
-      fetch('http://localhost:4000/')
+      fetch('127.0.0.1::4000/')
       .then((response) => response.json())
       .then((data) => {
         console.log("INIT")
@@ -34,7 +34,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:4000/data')
+    fetch('127.0.0.1:4000/data')
       .then((response) => response.json())
       .then((data) => {
           if(data['text'] != "Error"){
@@ -57,7 +57,7 @@ const Home = () => {
   }, []);
   useEffect(() => {
     const intervalId = setInterval(() => {
-          fetch('http://localhost:4000/data')
+          fetch('127.0.0.1:4000/data')
             .then((response) => response.json())
             .then((data) => {
               if(data['text'] != "Error"){

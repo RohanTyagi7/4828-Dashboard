@@ -28,7 +28,7 @@ xml_path = os.path.join(curr_path, "../src/xml/rticonf.xml")
 run_already = False
 
 auton_val = "None"
-profile_val = "Workshop"
+profile_val = "workshop"
 led_val = "off"
 joystick_val = "xbox"
 
