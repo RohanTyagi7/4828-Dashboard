@@ -1,7 +1,10 @@
 import ros2_node
 import time 
-time = time.time()
-runmin = 5
-ros2_node.main()
-while time < time + 1000*60*runmin:
-    print(str(time) + ":    " + ros2_node.data)
+#import requests
+#x=requests.get("http://localhost:4000/")
+#print(x)
+#ros2_node.main()
+for x in  range(2000):
+    times = time.time()
+    print(str(times) + ":    " + ros2_node.data)
+    time.sleep(1)
