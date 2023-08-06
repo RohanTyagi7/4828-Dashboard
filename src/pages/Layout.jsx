@@ -16,7 +16,7 @@ const Layout = () => {
           </div>
         </div>
       </nav>
-      <div className="lastUpdate">Last Updated 07.24.2023</div>
+      <div className="lastUpdate">Last Updated 08.04.2023</div>
       <Outlet />
     </>
   )
