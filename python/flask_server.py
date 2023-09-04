@@ -38,6 +38,7 @@ def bool(string):
 @app.route('/')
 # @limiter.limit("1 per minute")
 def start():
+    print("Starting server...")
     global run_already
     if not run_already:
         # subprocess.call("gnome-system-monitor")
@@ -149,7 +150,7 @@ def profile():
     except:
         return jsonify('Error setting profile to ' + type)
     
-@app.route('/auton/')
+@app.route('/auton')
 def auton():
     type = request.args.get('type')
     try:

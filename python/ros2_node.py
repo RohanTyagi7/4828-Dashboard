@@ -1,28 +1,32 @@
 import networktables
 from networktables import NetworkTables, NetworkTable
 
-nt : NetworkTable = None
+send_nt : NetworkTable = None
+recieve_nt : NetworkTable = None
 
 def initNetworkTables():
-    global nt
-    if nt == None:
+    global send_nt
+    global recieve_nt
+    if send_nt == None or recieve_nt == None:
         NetworkTables.initialize(server="localhost")
-        nt = NetworkTables.getTable("Dashboard")
-    return nt
+        recieve_nt = NetworkTables.getTable("Dashboard")
+        send_nt = NetworkTables.getTable("Dashboard_Sub")
+    return (send_nt, recieve_nt)
 
 def getData():
-    if nt == None:
+    if recieve_nt == None:
         initNetworkTables()
-    return nt.getString("dashboard", "None")
+    return recieve_nt.getString("dashboard", "None")
 
 def putData(data):
-    if nt == None:
+    if send_nt == None:
         initNetworkTables()
-    nt.putString("dashboard_sub", data)
+    send_nt.putString("dashboard", data)
 
 def main(args=None):
     # make sure this is only run once
-    global nt
-    if nt == None:
-        initNetworkTables()
+    global send_nt
+    global recieve_nt
+    if send_nt or recieve_nt == None:
+        send_nt, recieve_nt = initNetworkTables()
 
