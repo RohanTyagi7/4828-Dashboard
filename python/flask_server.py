@@ -4,7 +4,6 @@ from flask_cors import CORS, cross_origin
 import ros2_node
 import traceback
 import json
-import rticonnextdds_connector as rti
 import os
 import subprocess
 import inspect
@@ -41,8 +40,8 @@ def bool(string):
 def start():
     global run_already
     if not run_already:
-        subprocess.call("gnome-system-monitor")
-        os.system("gnome-system-monitor")
+        # subprocess.call("gnome-system-monitor")
+        # os.system("gnome-system-monitor")
         ros2_node.main()
         publish()
         run_already = True
@@ -51,7 +50,7 @@ def start():
 @app.route('/data', methods=['GET'])
 # @limiter.exempt
 def getRos2Data():
-    result = ros2_node.data
+    result = ros2_node.getData()
     if len(result) < 5:
         return {"text": "Error"}
     #result = "False|-0.0|xbox|off|False|Competition|High Place Auton|True|off|130|-0.0|0.0|-0.0|0.0|44.99999999999999|-45.0|-45.00000000000001|45.0|0.0|0.0|0.0|0.0|nan|True/-0.9|True/0.3|True/0.07|0.0|12.0|0|0|0|0|0|0|0|0|0|0|0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|"
@@ -184,7 +183,7 @@ def joystick():
         return jsonify('Error setting joystick to ' + type)
     
 def publish():
-    ros2_node.out = f"{auton_val}|{profile_val}|{led_val}|{joystick_val}"
+    ros2_node.putData(f"{auton_val}|{profile_val}|{led_val}|{joystick_val}")
     
 
 if __name__ == '__main__':

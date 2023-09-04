@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run start-flask\" \"npm run start-react\"",
-    "start-flask": "python3 python/flask_server.py",
+    "start-flask": "python python/flask_server.py",
     "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
